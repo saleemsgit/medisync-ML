@@ -47,7 +47,10 @@ import torch
 captured_data = []
 network_interface = '127.0.0.1'
 
-genai.configure(api_key="AIzaSyC126D4ED0w3B4nB8KdgtgSiCHvaQ7Hhms")
+# Read credentials from the runtime environment; do not commit API keys.
+gemini_api_key = os.getenv("GEMINI_API_KEY")
+if gemini_api_key:
+    genai.configure(api_key=gemini_api_key)
 gemini_model = genai.GenerativeModel('gemini-1.5-flash')
 
 # Initialize the FastAPI app
